@@ -59,7 +59,6 @@ var city = "Paris";
 
 //Weather Variables//
 var temperature = 23;
-var farenheit = 74;
 //End of Weather Variables//
 
 //Top Date/Time Box//
@@ -197,15 +196,7 @@ if (date5 === 1) {
   disp25.innerHTML = "th";
 }
 
-//emojis//
 
-
-
-
-
-farTemp.onclick = function () {
-  disp11.innerHTML = farenheit + "°F";
-};
 celTemp.onclick = function () {
   disp11.innerHTML = temperature + "°C";
 };
@@ -217,6 +208,16 @@ function displayWeatherCondition(response) {
     document.getElementById("bigHumidity").innerHTML = response.data.main.humidity + "%";
     document.getElementById("bigWind").innerHTML = Math.round(
     response.data.wind.speed)  + "mph" ;
+    let farenheit = Math.round(
+        response.data.main.temp/5*9) + 32;
+    farTemp.onclick = function () {
+        disp11.innerHTML = farenheit + "°F";
+      };
+      celTemp.onclick = function () {
+        disp11.innerHTML = Math.round(
+            response.data.main.temp) + "°C";
+      };
+
 }
 
 
