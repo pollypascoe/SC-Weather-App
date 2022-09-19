@@ -1,0 +1,116 @@
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="styles.css">
+<!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet"/>
+<!--FontAwesome-->
+    <script src="https://kit.fontawesome.com/7f6c6a276d.js" crossorigin="anonymous"></script>
+<!--Axios-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Weather Girl</title> 
+    </head>
+    <body>
+    <center>
+    <br>
+    <div class="appcont">
+    <br>
+<!--Search Box-->
+    <form id="searchForm">
+    <input type="text" id="cityInput" class="searchInput" placeholder="Search" />
+    <input type="submit" id ="searchBtn" class="searchBtn" value="Search" />
+    </form>
+<!--End of Search Box-->
+
+<!--Large Weather Element-->
+    <div class="citydiv"><span id="bigCity"></span>
+    <br>
+    <span id="bigEmoji"></span>
+    <br>
+    <span id="bigTemp"></span> 
+    <br><br>
+    </div>
+<!--End of Large Weather Element-->
+
+<!--Temperature Conversion-->
+    <input type="submit" id="celTemp" class="tempBtn" value="Celcius">
+    <input type="submit" id="farTemp" class="tempBtn" value="Farenheit">
+    <br>
+    <br>
+<!--End of Temperature Conversion-->
+
+<!--Current Location Buttons-->
+    <input type="submit" id="currLocBtn" class="currTempBtn" value="Current Weather Where You Are">
+    <br>
+<!--End of Location Button-->
+
+<!--Weather Alert-->
+    <br>
+    <table class="lweTable" width="75%">
+<!--Current Time and Date-->  
+    <td colspan="5">             
+    <center>
+    <span id="currTime"></span> on <span id="currDate"></span>  <span id="bigDay"> </span> <span id="bigDate"></span>  <span id="bigDateEx"></span> <span id="bigMonth"></span></center>
+    </td>
+<!-- End of Current Time and Date-->
+<!-- Current Weather Conditions -->              
+    <tr>
+    <th class = "headTh">Weather</th>
+    <th class = "headTh">Wind Speed</th>
+    <th class = "headTh">Humidity</th>
+    </tr>
+    <tr>
+    <th class = "bottomTh">
+    <span id="weatherBox">Calm</span>
+    </th>
+    <th class = "bottomTh">
+    <span id="bigWind">7mph</span>
+    </th>
+    <th class = "bottomTh">
+    <span id="bigHumidity">76%</span>
+    </th>
+    </tr>
+    </tr>
+    <td colspan="5">
+    <center>
+    <span id="weatherAlert">Add weather alert message here.</span>
+    </center>
+    </td>
+    </table>
+<!--End of Current Weather Conditions-->
+<!--End of Weather Alert-->
+
+ <!--Weather Forecast-->
+ <table width="75%">
+   <tr>
+    <th class = "headTh"><span id="dayOne"></span><span id="dayOneEx"></span></th>
+    <th class = "headTh"><span id="dayTwo"></span><span id="dayTwoEx"></span></th>
+    <th class = "headTh"><span id="dayThr"></span><span id="dayThrEx"></span></th>
+    <th class = "headTh"><span id="dayFou"></span><span id="dayFouEx"></span></th>
+    <th class = "headTh"><span id="dayFiv"></span><span id="dayFivEx"></span></th>
+   </tr>
+   <tr>
+    <th class = "bottomTh"><span id="tempOne">12</span> °c</th>
+    <th class = "bottomTh"><span id="tempTwo">12</span> °c</th>
+    <th class = "bottomTh"><span id="tempThree">12</span> °c</th>
+    <th class = "bottomTh"><span id="tempFour">12</span> °c</th>
+    <th class = "bottomTh"><span id="tempFive">12</span> °c</th>
+  </tr>
+   <tr>
+    <th class = "bottomTh"><span id="weatherOne">🌧</span></th>
+    <th class = "bottomTh"><span id="weatherTwo">🌧</span></th>
+    <th class = "bottomTh"><span id="weatherThree">🌧</span></th>
+    <th class = "bottomTh"><span id="weatherFour">🌧</span></th>
+    <th class = "bottomTh"><span id="weatherFive">🌧</span></th>
+   </tr>
+   <tr>
+    <th class = "bottomTh"><span id="windOne"> 5 </span> kmh</th>
+    <th class = "bottomTh"><span id="windTwo"> 6 </span> kmh</th>
+    <th class = "bottomTh"><span id="windTwo"> 5 </span> kmh</th>
+    <th class = "bottomTh"><span id="windTwo"> 8 </span> kmh</th>
+  </tr>
+ </table>
+</div>
+<script src="script.js"></script>
+</center>
