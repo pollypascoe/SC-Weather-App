@@ -196,11 +196,6 @@ if (date5 === 1) {
   disp25.innerHTML = "th";
 }
 
-
-celTemp.onclick = function () {
-  disp11.innerHTML = temperature + "°C";
-};
-
 function displayWeatherCondition(response) {
     document.getElementById("bigCity").innerHTML = response.data.name;
     document.getElementById("bigTemp").innerHTML = Math.round(
