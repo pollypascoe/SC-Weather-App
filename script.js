@@ -54,7 +54,7 @@ var dispDay = days[now.getDay()];
 //End of Date Variables//
 
 //Location Variables//
-var city = "Paris";
+var city = "London";
 //End of Location Variables//
 
 //Weather Variables//
@@ -202,7 +202,7 @@ function displayWeatherCondition(response) {
     response.data.main.temp) + "°c" ;
     document.getElementById("bigHumidity").innerHTML = response.data.main.humidity + "%";
     document.getElementById("bigWind").innerHTML = Math.round(
-    response.data.wind.speed)  + "mph" ;
+    response.data.wind.speed)  + "kmh" ;
     let farenheit = Math.round(
         response.data.main.temp/5*9) + 32;
     farTemp.onclick = function () {
@@ -211,8 +211,29 @@ function displayWeatherCondition(response) {
       celTemp.onclick = function () {
         disp11.innerHTML = Math.round(
             response.data.main.temp) + "°C";
-      };
+      }; 
+        let bigIcon = document.querySelector("img");
+        bigIcon.setAttribute("src", "http://openweathermap.org/img/wn/" + response.data.weather[0].icon +"@2x.png");
+        let disp41 = document.getElementById("weatherBox");
+        let description = response.data.weather[0].description;
+        disp41.innerHTML = description.charAt(0).toUpperCase()+ description.slice(1);
+        let disp10 = document.getElementById("weatherAlert");
+        if (response.data.main.temp > 30) {
+        disp10.innerHTML = "It's going to be really hot today. <br>Make sure you stay hydrated!";}
+        if (response.data.main.temp < 31 && response.data.main.temp > 25) {
+        disp10.innerHTML = "It's going to be hot today. <br>Make sure you take your sunscreen!";}
+        if (response.data.main.temp < 26 && response.data.main.temp > 20) {
+        disp10.innerHTML = "It's going to be nice and warm today. <br>Perfect for ice cream!";}
+        if (response.data.main.temp < 21 && response.data.main.temp > 15) {
+        disp10.innerHTML = "It's going to be mild today. <br>Make sure you take a coat!";}
+        if (response.data.main.temp < 16 && response.data.main.temp > 10) {
+        disp10.innerHTML = "It's going to be chilly today. <br>Make sure you take a coat!";}
+        if (response.data.main.temp < 11 && response.data.main.temp > 5) {
+        disp10.innerHTML = "It's going to be cold today. <br>Make sure you take a scarf and gloves!";}
+        if (response.data.main.temp < 6) {
+        disp10.innerHTML = "It's going to be too cold today. <br> Stay indoors and enjoy a hot chocolate. ";}
 
+                                  console.log(response.data);
 }
 
 
