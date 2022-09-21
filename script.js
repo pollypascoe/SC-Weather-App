@@ -196,6 +196,56 @@ if (date5 === 1) {
   disp25.innerHTML = "th";
 }
 
+
+function displayForecast(response) {
+  console.log(response.data);
+  document.getElementById("tempOne").innerHTML = Math.round(response.data.daily[0].temp.day) + " °c";
+  document.getElementById("tempTwo").innerHTML = Math.round(response.data.daily[1].temp.day) + " °c";
+  document.getElementById("tempThree").innerHTML = Math.round(response.data.daily[2].temp.day) + " °c";
+  document.getElementById("tempFour").innerHTML = Math.round(response.data.daily[3].temp.day) + " °c";
+  document.getElementById("tempFive").innerHTML = Math.round(response.data.daily[4].temp.day) + " °c";
+  document.getElementById("windOne").innerHTML = Math.round(response.data.daily[0].wind_speed) + " kmh";
+  document.getElementById("windTwo").innerHTML = Math.round(response.data.daily[1].wind_speed) + " kmh";
+  document.getElementById("windThree").innerHTML = Math.round(response.data.daily[2].wind_speed) + " kmh";
+  document.getElementById("windFour").innerHTML = Math.round(response.data.daily[3].wind_speed) + " kmh";
+  document.getElementById("windFive").innerHTML = Math.round(response.data.daily[4].wind_speed) + " kmh";    
+  document.getElementById("humOne").innerHTML = Math.round(response.data.daily[0].wind_speed) + " %";
+  document.getElementById("humTwo").innerHTML = Math.round(response.data.daily[1].wind_speed) + " %";
+  document.getElementById("humThree").innerHTML = Math.round(response.data.daily[2].wind_speed) + " %";
+  document.getElementById("humFour").innerHTML = Math.round(response.data.daily[3].wind_speed) + " %";
+  document.getElementById("humFive").innerHTML = Math.round(response.data.daily[4].wind_speed) + " %";  
+  document.getElementById("weatherOneImg").setAttribute("src", "http://openweathermap.org/img/wn/" + response.data.daily[0].weather[0].icon +"@2x.png");
+  document.getElementById("weatherTwoImg").setAttribute("src", "http://openweathermap.org/img/wn/" + response.data.daily[1].weather[0].icon +"@2x.png");
+  document.getElementById("weatherThreeImg").setAttribute("src", "http://openweathermap.org/img/wn/" + response.data.daily[2].weather[0].icon +"@2x.png");
+  document.getElementById("weatherFourImg").setAttribute("src", "http://openweathermap.org/img/wn/" + response.data.daily[3].weather[0].icon +"@2x.png");
+  document.getElementById("weatherFiveImg").setAttribute("src", "http://openweathermap.org/img/wn/" + response.data.daily[4].weather[0].icon +"@2x.png");
+
+  celTemp.onclick = function () {
+  document.getElementById("tempOne").innerHTML = Math.round(response.data.daily[0].temp.day) + " °c";
+  document.getElementById("tempTwo").innerHTML = Math.round(response.data.daily[1].temp.day) + " °c";
+  document.getElementById("tempThree").innerHTML = Math.round(response.data.daily[2].temp.day) + " °c";
+  document.getElementById("tempFour").innerHTML = Math.round(response.data.daily[3].temp.day) + " °c";
+  document.getElementById("tempFive").innerHTML = Math.round(response.data.daily[4].temp.day) + " °c";
+  disp11.innerHTML = Math.round(response.data.current.temp) + "°c";
+  };
+
+  farTemp.onclick = function(){
+  document.getElementById("tempOne").innerHTML = Math.round(response.data.daily[0].temp.day/5*9+ 32) + " °f";
+  document.getElementById("tempTwo").innerHTML = Math.round(response.data.daily[1].temp.day/5*9+ 32) + " °f";
+  document.getElementById("tempThree").innerHTML = Math.round(response.data.daily[2].temp.day/5*9+ 32) + " °f";
+  document.getElementById("tempFour").innerHTML = Math.round(response.data.daily[3].temp.day/5*9+ 32) + " °f";
+  document.getElementById("tempFive").innerHTML = Math.round(response.data.daily[4].temp.day/5*9+ 32) + " °f";
+  document.getElementById("bigTemp").innerHTML = Math.round(response.data.current.temp/5*9+32) + "°f" ; 
+};
+  }
+
+
+function getForecast(coordinates) {
+  let apiKey = "6c5621af472ccc1d447bcf74c7a52dd4";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
+
 function displayWeatherCondition(response) {
     document.getElementById("bigCity").innerHTML = response.data.name;
     document.getElementById("bigTemp").innerHTML = Math.round(
@@ -203,68 +253,54 @@ function displayWeatherCondition(response) {
     document.getElementById("bigHumidity").innerHTML = response.data.main.humidity + "%";
     document.getElementById("bigWind").innerHTML = Math.round(
     response.data.wind.speed)  + "kmh" ;
-    let farenheit = Math.round(
-        response.data.main.temp/5*9) + 32;
-    farTemp.onclick = function () {
-        disp11.innerHTML = farenheit + "°F";
-      };
-      celTemp.onclick = function () {
-        disp11.innerHTML = Math.round(
-            response.data.main.temp) + "°C";
-      }; 
-        let bigIcon = document.querySelector("img");
-        bigIcon.setAttribute("src", "http://openweathermap.org/img/wn/" + response.data.weather[0].icon +"@2x.png");
-        let disp41 = document.getElementById("weatherBox");
-        let description = response.data.weather[0].description;
-        disp41.innerHTML = description.charAt(0).toUpperCase()+ description.slice(1);
-        let disp10 = document.getElementById("weatherAlert");
-        if (response.data.main.temp > 30) {
-        disp10.innerHTML = "It's going to be really hot today. <br>Make sure you stay hydrated!";}
-        if (response.data.main.temp < 31 && response.data.main.temp > 25) {
-        disp10.innerHTML = "It's going to be hot today. <br>Make sure you take your sunscreen!";}
-        if (response.data.main.temp < 26 && response.data.main.temp > 20) {
-        disp10.innerHTML = "It's going to be nice and warm today. <br>Perfect for ice cream!";}
-        if (response.data.main.temp < 21 && response.data.main.temp > 15) {
-        disp10.innerHTML = "It's going to be mild today. <br>Make sure you take a coat!";}
-        if (response.data.main.temp < 16 && response.data.main.temp > 10) {
-        disp10.innerHTML = "It's going to be chilly today. <br>Make sure you take a coat!";}
-        if (response.data.main.temp < 11 && response.data.main.temp > 5) {
-        disp10.innerHTML = "It's going to be cold today. <br>Make sure you take a scarf and gloves!";}
-        if (response.data.main.temp < 6) {
-        disp10.innerHTML = "It's going to be too cold today. <br> Stay indoors and enjoy a hot chocolate. ";}
-
-                                  console.log(response.data);
+    let bigIcon = document.querySelector("img");
+    bigIcon.setAttribute("src", "http://openweathermap.org/img/wn/" + response.data.weather[0].icon +"@2x.png");
+    let disp41 = document.getElementById("weatherBox");
+    let description = response.data.weather[0].description;
+    disp41.innerHTML = description.charAt(0).toUpperCase()+ description.slice(1);
+    let disp10 = document.getElementById("weatherAlert");
+    if (response.data.main.temp > 30) {
+    disp10.innerHTML = "It's going to be really hot today. <br>Make sure you stay hydrated!";}
+    if (response.data.main.temp < 31 && response.data.main.temp > 25) {
+    disp10.innerHTML = "It's going to be hot today. <br>Make sure you take your sunscreen!";}
+    if (response.data.main.temp < 26 && response.data.main.temp > 20) {
+    disp10.innerHTML = "It's going to be nice and warm today. <br>Perfect for ice cream!";}
+    if (response.data.main.temp < 21 && response.data.main.temp > 15) {
+    disp10.innerHTML = "It's going to be mild today. <br>Make sure you take a coat!";}
+    if (response.data.main.temp < 16 && response.data.main.temp > 10) {
+    disp10.innerHTML = "It's going to be chilly today. <br>Make sure you take a coat!";}
+    if (response.data.main.temp < 11 && response.data.main.temp > 5) {
+    disp10.innerHTML = "It's going to be cold today. <br>Make sure you take a scarf and gloves!";}
+    if (response.data.main.temp < 6) {
+    disp10.innerHTML = "It's going to be too cold today. <br> Stay indoors and enjoy a hot chocolate. ";}
+    getForecast(response.data.coord);
 }
-
 
 function searchSubmit(event) {
   event.preventDefault();
   let city = cityInput.value;
   searchCity(city);
 }
-
 function searchCity(city) {
   var apiKey = "5c4fd2d0f60f604f376814c42a7d0de3";
   var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q="
     .concat(city, "&appid=")
     .concat(apiKey, "&units=metric");
-  axios.get(apiUrl).then(displayWeatherCondition)
+  axios.get(apiUrl).then(displayWeatherCondition);
 }
-
 function getCurrentLocation(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(searchLocation);
 }
 function searchLocation(position) {
+  let lat = position.coords.latitude;
+  let long = position.coords.longitude;
   let apiKey = "5c4fd2d0f60f604f376814c42a7d0de3";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayWeatherCondition);
 }
-
 let form = document.querySelector("form");
 form.addEventListener("submit", searchSubmit);
-
 let formTwo = document.getElementById("currLocBtn");
 formTwo.addEventListener("click", getCurrentLocation);
-
 searchCity("London");
